@@ -639,7 +639,7 @@ async def classify_intent(text: str, client: anthropic.AsyncAnthropic) -> dict:
     """
     try:
         response = await client.messages.create(
-            model="claude-haiku-4-5-20251001",
+            model="claude-3-5-haiku-20241022",
             max_tokens=100,
             system=(
                 "Classify this voice command. The user is talking to JARVIS, an AI assistant that can:\n"
@@ -1139,7 +1139,7 @@ async def generate_response(
 
     try:
         response = await client.messages.create(
-            model="claude-haiku-4-5-20251001",
+            model="claude-3-5-haiku-20241022",
             max_tokens=250,  # Extra room for [ACTION:X] tags
             system=system,
             messages=messages,
@@ -1773,7 +1773,7 @@ async def handle_research(text: str, target: str, client: anthropic.AsyncAnthrop
     """Deep research with Opus — write results to HTML, open in browser."""
     try:
         research_response = await client.messages.create(
-            model="claude-opus-4-6",
+            model="claude-3-opus-20240229",
             max_tokens=2000,
             system=f"You are JARVIS, researching a topic for {USER_NAME}. Be thorough, organized, and cite sources where possible.",
             messages=[{"role": "user", "content": f"Research this thoroughly:\n\n{target}"}],
@@ -2422,7 +2422,7 @@ async def api_test_anthropic(body: KeyTest):
         return {"valid": False, "error": "No key provided"}
     try:
         client = anthropic.AsyncAnthropic(api_key=key)
-        await client.messages.create(model="claude-haiku-4-5-20251001", max_tokens=10, messages=[{"role": "user", "content": "Hi"}])
+        await client.messages.create(model="claude-3-5-haiku-20241022", max_tokens=10, messages=[{"role": "user", "content": "Hi"}])
         return {"valid": True}
     except Exception as e:
         return {"valid": False, "error": str(e)[:200]}
